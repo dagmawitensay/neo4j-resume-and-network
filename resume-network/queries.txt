@@ -1,0 +1,32 @@
+1. List of Projects I used javascript
+
+MATCH (skill:SKILL {name: "JavaScript"})<-[:USED_SKILL]-(prj:PROJECT)
+RETURN prj.name as ProjectName, prj.description as ProjectDescription
+
+2. List of all skils used in E-commerece web app project
+
+MATCH (skill:SKILL)<-[:USED_SKILL]-(prj:PROJECT {name: "E-commerce web app"})
+RETURN skill
+
+3. List of all projects completed by me
+
+MATCH (prj:PROJECT)<-[:COMPLETED]-(dagmawi:PERSON)
+RETURN prj.name as ProjectName, prj.description as ProjectDescription
+
+4. List all my education details
+
+MATCH (p:PERSON {name: "Dagmawi"})-[:EDUCATED_AT]->(edu:EDUCATION)
+RETURN edu.degree AS Degree, edu.institution AS Institution, edu.startYear AS StartYear, edu.endYear AS EndYear
+
+5. List of all Jobs I have Worked
+
+MATCH (p:PERSON {name: "Dagmawi"})-[:WORKED_AT]->(exp:EXPERIENCE)
+RETURN exp.title AS JobTitle, exp.company AS Company, exp.startYear AS StartYear, exp.endYear AS EndYear
+
+6. List of all Jobs and Projects where I have used NestJs
+
+MATCH (skill:SKILL {name: "NestJs"})<-[:USED_SKILL]-(exp:EXPERIENCE)
+RETURN exp as result
+UNION
+MATCH (skill:SKILL {name: "NestJs"})<-[:USED_SKILL]-(proj:PROJECT)
+RETURN proj as result
