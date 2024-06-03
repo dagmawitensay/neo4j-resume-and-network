@@ -1,5 +1,5 @@
 CREATE
-(dagmawi: PERSON {name: "Dagmawi", age: "22"}),
+(dagmawi: PERSON {name: "Dagmawi"}),
 
 (python: SKILL {name: "Python", since: "2021"}),
 (javascript: SKILL {name: "JavaScript", since: "2022"}),
