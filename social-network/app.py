@@ -94,3 +94,10 @@ def find_user():
     
     result = db.find_user_by_name(name)
     return result
+
+
+@app.route('/users/<user_name>/recommendations')
+def recommendations(user_name):
+    result = db.recommend_friends(user_name)
+    
+    return result

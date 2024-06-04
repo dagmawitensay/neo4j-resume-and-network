@@ -1,8 +1,15 @@
 from neo4j import GraphDatabase
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 URI = "neo4j+s://5de91f4b.databases.neo4j.io"
 USERNAME = "neo4j"
+PASSWORD = os.getenv('PASSWORD')
+
 
 
 class DbLayer:
@@ -213,6 +220,22 @@ class DbLayer:
         
         return result[0]['user']._properties
     
+
+    def recommend_friends(self, name):
+        query = """
+            MATCH (user: USER {name: $name})-[:FRIENDS_WITH]->(users1)<-[:FRIENDS_WITH]-(userFriends),
+            (userFriends)-[:FRIENDS_WITH]->(users2)<-[:FRIENDS_WITH]-(distantFriends)
+            WHERE NOT exists exists { (user)-[:FRIENDS_WITH]->()<-[:FRIENDS_WITH]-(distantFriends) } AND user <> distantFriends
+            RETURN distantFriends.name AS recommended, count(*) AS score ORDER BY score DESC
+            """
+        parameters = {
+            "name": name
+        }
+
+        result = self.run_query(query, parameters)
+
+        return result
+
     
 
 
