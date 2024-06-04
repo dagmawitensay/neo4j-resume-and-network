@@ -3,7 +3,6 @@ from neo4j import GraphDatabase
 
 URI = "neo4j+s://5de91f4b.databases.neo4j.io"
 USERNAME = "neo4j"
-PASSWORD = "bofML0JKgUDNPC4DA35k62fkUyPLtnQP5lbLPWykCEU"
 
 
 class DbLayer:
